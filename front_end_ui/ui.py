@@ -11,12 +11,32 @@ def update_all():
 
     global class_object_list, class_id
     class_object_list = []  # Clear class object list ready for refresh
+
     from quizlib import classes
     os.chdir(data_directory)
 
     for directory in os.listdir(os.getcwd()):
         class_id = directory.split(" - ")[0]
         class_object_list.append(classes.Class(class_id))
+
+    max_id = 0
+    for class_obj in class_object_list: # Find highest class id
+        if class_obj.class_id > max_id:
+            max_id = class_obj.class_id
+
+    temp_list = []
+    for count in range(max_id + 1):
+        for class_obj in class_object_list:
+            if class_obj.class_id == count:
+                temp_list.append(class_obj)
+                break
+            else:
+                temp_list.append(None)
+                break
+
+    class_object_list = temp_list.copy()
+    del temp_list
+
 
     os.chdir(quizlib_directory)
 
@@ -141,7 +161,7 @@ while True:
     elif choice == "3":
         os.chdir(data_directory)
         from quizlib import data_structure
-        data_structure.create_new_classes()
+        data_structure.create_new_classes(class_object_list)
 
     elif choice == "4":
         select_class_id()

@@ -5,11 +5,14 @@ __author__ = 'Eugene'
 
 
 class Class:
-    def __init__(self, class_id):
+    def __init__(self, class_id, teacher_name=None, new=False):
 
         self.class_id = class_id
         self.student_list = []
         self.update_class_object()
+        if new:
+            self.create_class_file()
+        self.teacher_name = self.get_class_teacher()
 
     def update_class_object(self):
 
@@ -27,6 +30,11 @@ class Class:
     def create_new_student(self, student_name):
         student_object = student.Student(len(self.student_list), self.class_id, student_name, True)
         self.student_list.append(student_object)
+
+    def create_class_file(self):
+        os.chdir(get_class_directory(self.class_id))
+        os.mkdir("{0} - {1}".format(self.class_id, self.teacher_name))
+        os.chdir(quizlib_directory)
 
     def get_class_teacher(self):
         directory = get_class_directory(self.class_id)

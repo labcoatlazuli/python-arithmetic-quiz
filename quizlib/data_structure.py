@@ -20,8 +20,29 @@ def init():
     os.chdir("../quizlib")
 
 
-def create_new_classes():
+def create_new_classes(class_list):
     number_of_new_classes = 0
+    empty_class_ids =[]
+    for class_obj in class_list:
+        if class_obj is None:
+            empty_class_ids.append(class_list.index(class_obj))
+
+    if len(empty_class_ids) is not 0:
+        print("There are some unused class IDs available.")
+        if input("Would you like to fill a few of them first before creating new ones?").lower() in ["y", "yes"]:
+            while True:
+                try:
+                    print("Here are the unused class IDs:")
+                    for ID in empty_class_ids:
+                        print(ID)
+                    positions = input("Please input the unused Class IDs above you would like to fill:")
+                    positions = positions.split(",")
+                    positions = [int(pos.strip()) for pos in positions]
+                    if set(positions).issubset(empty_class_ids):
+
+
+                except ValueError:
+                    pass
 
     while True:
         try:
@@ -37,6 +58,7 @@ def create_new_classes():
 
     for class_id in range(number_of_existing_classes, number_of_existing_classes + number_of_new_classes):
         class_teacher_name = input("Please input the class teacher's name for class {}: ".format(class_id))
+
         os.mkdir("{0} - {1}".format(class_id, class_teacher_name))
 
     os.chdir(quizlib_directory)
@@ -61,3 +83,10 @@ def create_new_students(class_object):
         class_object.create_new_student(student_name)
 
     os.chdir(quizlib_directory)
+
+def get_highest_id(object_list: list, id_attribute_name: str):
+    id_list =[]
+    for obj in object_list:
+        id_list.append(obj.getattr(id_attribute_name))
+    highest_id = max(id_list)
+    return highest_id

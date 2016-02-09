@@ -35,7 +35,6 @@ class Student:
             print("{} has been created successfully.".format(filename))
 
         os.chdir(quizlib_directory)
-        self.update_student_object_scores()
 
     def update_student_savefile(self, new_score):
         os.chdir(get_class_directory(self.class_id))
