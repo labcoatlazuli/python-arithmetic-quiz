@@ -1,6 +1,6 @@
 import os
 from quizlib import student
-from quizlib import quizlib_directory, get_class_directory
+from quizlib import quizlib_directory, get_class_directory, data_directory
 __author__ = 'Eugene'
 
 
@@ -9,10 +9,11 @@ class Class:
 
         self.class_id = class_id
         self.student_list = []
-        self.update_class_object()
         if new:
+            self.teacher_name = teacher_name
             self.create_class_file()
         self.teacher_name = self.get_class_teacher()
+        self.update_class_object()
 
     def update_class_object(self):
 
@@ -32,7 +33,8 @@ class Class:
         self.student_list.append(student_object)
 
     def create_class_file(self):
-        os.chdir(get_class_directory(self.class_id))
+        print("Creating new folder for class {}...".format(self.class_id))
+        os.chdir(data_directory)
         os.mkdir("{0} - {1}".format(self.class_id, self.teacher_name))
         os.chdir(quizlib_directory)
 

@@ -21,18 +21,19 @@ def update_all():
 
     max_id = 0
     for class_obj in class_object_list: # Find highest class id
-        if class_obj.class_id > max_id:
+        if int(class_obj.class_id) > int(max_id):
             max_id = class_obj.class_id
 
     temp_list = []
-    for count in range(max_id + 1):
+    for count in range(int(max_id) + 1):
+        class_object_present = False
         for class_obj in class_object_list:
-            if class_obj.class_id == count:
+            if int(class_obj.class_id) == count:
                 temp_list.append(class_obj)
+                class_object_present = True
                 break
-            else:
-                temp_list.append(None)
-                break
+        if class_object_present == False:
+            temp_list.append(None)
 
     class_object_list = temp_list.copy()
     del temp_list
@@ -40,13 +41,13 @@ def update_all():
 
     os.chdir(quizlib_directory)
 
-
 def select_class_id():
     print("Here's a list of all the registered classes. Please enter the ID of your class.")
 
     global class_id, class_object_list
     for class_object in class_object_list:
-        print(" - {0}'s class, class ID {1}".format(class_object.get_class_teacher(), class_object.class_id))
+        if class_object is not None:
+            print(" - {0}'s class, class ID {1}".format(class_object.get_class_teacher(), class_object.class_id))
     while True:
         try:
             try:
@@ -72,6 +73,7 @@ while True:
     print("2: View scores for a class")
     print("3: Add new classes")
     print("4: Add new student accounts")
+
     choice = input("Please enter your choice here: ")
     if choice == "1":
 

@@ -33,6 +33,7 @@ def quiz():
             print("You got it correct!")
         else:
             print("You got it wrong. Better luck next time!")  # Do nothing to score if the player got the answer wrong.
+            print("The answer you were looking for is: ", correct_answer)
 
     print("Well done! You got {0} out of 10!".format(player_score))  # Tell the user what their final score was.
 

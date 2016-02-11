@@ -22,6 +22,7 @@ def init():
 
 def create_new_classes(class_list):
     number_of_new_classes = 0
+    positions = []
     empty_class_ids =[]
     for class_obj in class_list:
         if class_obj is None:
@@ -39,27 +40,40 @@ def create_new_classes(class_list):
                     positions = positions.split(",")
                     positions = [int(pos.strip()) for pos in positions]
                     if set(positions).issubset(empty_class_ids):
-
+                        break
+                    else:
+                        print("Please enter Class IDs from the unused ones available.")
 
                 except ValueError:
-                    pass
+                    print("Please enter valid integers")
 
     while True:
         try:
-            number_of_new_classes = int(input("Please enter the number of classes that you would like to create: "))
-            if number_of_new_classes >= 1:
+            number_of_new_classes = int(input("Please enter the number of additional classes that you would like to create: "))
+            if number_of_new_classes >= 0:
                 break
             else:
-                print("Please enter a number equal to or larger than 1.")
+                print("Please enter a number equal to or larger than 0.")
         except ValueError:
             print("Please ensure that you enter a number. Please try again.")
 
-    number_of_existing_classes = len(os.listdir(os.getcwd()))
+    # number_of_existing_classes = len(os.listdir(os.getcwd()))
+    if number_of_new_classes == 0:
+        new_class_ids = positions
+    else:
+        new_class_ids = positions + list(range(get_next_id(class_list, "class_id"), get_next_id(class_list, "class_id") + number_of_new_classes))
+    new_class_ids = [int(id) for id in new_class_ids]
 
-    for class_id in range(number_of_existing_classes, number_of_existing_classes + number_of_new_classes):
+    print(new_class_ids)
+
+    for class_id in new_class_ids:
         class_teacher_name = input("Please input the class teacher's name for class {}: ".format(class_id))
+        try:
+            class_list[class_id] = None
+            class_list[class_id] = classes.Class(class_id, class_teacher_name, True)
+        except IndexError:
+            class_list.append(classes.Class(class_id, class_teacher_name, True))
 
-        os.mkdir("{0} - {1}".format(class_id, class_teacher_name))
 
     os.chdir(quizlib_directory)
 
@@ -84,9 +98,10 @@ def create_new_students(class_object):
 
     os.chdir(quizlib_directory)
 
-def get_highest_id(object_list: list, id_attribute_name: str):
+def get_next_id(object_list: list, id_attribute_name: str):
     id_list =[]
     for obj in object_list:
-        id_list.append(obj.getattr(id_attribute_name))
+        if obj is not None:
+            id_list.append(getattr(obj, id_attribute_name))
     highest_id = max(id_list)
-    return highest_id
+    return int(highest_id) + 1
