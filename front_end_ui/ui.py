@@ -7,7 +7,7 @@ student_id = 0
 class_id = 0
 
 
-def update_all():
+def update_all(): # Updates all objects from save files
 
     global class_object_list, class_id
     class_object_list = []  # Clear class object list ready for refresh
@@ -15,9 +15,9 @@ def update_all():
     from quizlib import classes
     os.chdir(data_directory)
 
-    for directory in os.listdir(os.getcwd()):
-        class_id = directory.split(" - ")[0]
-        class_object_list.append(classes.Class(class_id))
+    for directory in os.listdir(os.getcwd()): # Creates class objects from class folders
+        class_id = directory.split(" - ")[0] # Gets class id from the class folder file path
+        class_object_list.append(classes.Class(class_id)) # Adds new class object to list
 
     max_id = 0
     for class_obj in class_object_list: # Find highest class id
@@ -25,9 +25,9 @@ def update_all():
             max_id = class_obj.class_id
 
     temp_list = []
-    for count in range(int(max_id) + 1):
-        class_object_present = False
-        for class_obj in class_object_list:
+    for count in range(int(max_id) + 1): # This entire section moves class objects to the list index specified by their
+        class_object_present = False     # class id, so if there are missing class folders for eg class 3, index 3
+        for class_obj in class_object_list: # is not taken up by another class. Instead a placeholder None is assigned.
             if int(class_obj.class_id) == count:
                 temp_list.append(class_obj)
                 class_object_present = True
@@ -39,12 +39,12 @@ def update_all():
     del temp_list
 
 
-    os.chdir(quizlib_directory)
+    os.chdir(quizlib_directory) # Always return to the starting directory after file handling operations
 
-def select_class_id():
+def select_class_id(): # General class selector function: prints out current classes, prompts for a selection
     print("Here's a list of all the registered classes. Please enter the ID of your class.")
 
-    global class_id, class_object_list
+    global class_id, class_object_list # We are modifying variables outside the scope of the function w/ global keyword
     for class_object in class_object_list:
         if class_object is not None:
             print(" - {0}'s class, class ID {1}".format(class_object.get_class_teacher(), class_object.class_id))
@@ -66,7 +66,7 @@ class InvalidSelectionError(Exception):
     pass
 
 while True:
-    update_all()
+    update_all() # Update class objects from save files at the beginning of each program loop
 
     print("Hello! Welcome to the quiz menu! Please enter a number to perform a task.")
     print("1: Play the quiz. You will be asked to login beforehand.")
@@ -74,7 +74,7 @@ while True:
     print("3: Add new classes")
     print("4: Add new student accounts")
 
-    choice = input("Please enter your choice here: ")
+    choice = input("Please enter your choice here: ") # choice is left as a string - no need for ValueError try-catch
     if choice == "1":
 
         print("Just before you play, you'll need to login.")
@@ -82,11 +82,11 @@ while True:
         select_class_id()
         current_class = class_object_list[class_id]
 
-        if input("Do you know your student ID? Yes/no: ").lower() not in ["y", "yes"]:
+        if input("Do you know your student ID? Yes/no: ").lower() not in ["y", "yes"]: # Name search function
             potential_student_list = []
-            student_name = input("Please enter your name, we'll show you a list of matching students: ")
+            student_name = input("Please enter your name, we'll show you a list of matching students: ").lower()
             for student_object in current_class.student_list:
-                if student_name in student_object.student_name:
+                if student_name in student_object.student_name.lower():
                     potential_student_list.append(student_object)
 
             if len(potential_student_list) == 0:
@@ -116,10 +116,10 @@ while True:
         current_student = current_class.student_list[student_id]
 
         from quizlib import quiz
-        student_score = quiz.quiz()
-        current_student.update_student_savefile(student_score)
+        student_score = quiz.quiz() # Runs the quiz after login
+        current_student.update_student_savefile(student_score) # Update save files
 
-    elif choice == "2":
+    elif choice == "2": # Returns scores. See classes.py for sorting methods
         select_class_id()
 
         current_class = class_object_list[class_id]
@@ -160,12 +160,12 @@ while True:
         else:
             print("Invalid choice.")
 
-    elif choice == "3":
+    elif choice == "3": # Creates new classes on request. See data_structure.py
         os.chdir(data_directory)
         from quizlib import data_structure
         data_structure.create_new_classes(class_object_list)
 
-    elif choice == "4":
+    elif choice == "4": # Creates new students on request. See data_structure.py
         select_class_id()
         current_class = class_object_list[class_id]
         from quizlib import data_structure

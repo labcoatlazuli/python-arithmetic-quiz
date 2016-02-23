@@ -3,16 +3,13 @@ from quizlib import quizlib_directory, get_class_directory, classes
 __author__ = 'Eugene'
 
 
-"""We're pretty screwed if the user ever wants to delete stuff."""
-
-
-def init():
+def init(): # Checks for existing data. If not, prompt user to create new classes.
     if not os.path.exists("../data"):
         os.chdir("..")
         os.mkdir("data")
         os.chdir("data")
 
-        create_new_classes()
+        create_new_classes([])
 
     else:
         print("Initial file setup has already been run. If you want to reset all data, delete the data folder.")
@@ -23,7 +20,7 @@ def init():
 def create_new_classes(class_list):
     number_of_new_classes = 0
     positions = []
-    empty_class_ids =[]
+    empty_class_ids = []
     for class_obj in class_list:
         if class_obj is None:
             empty_class_ids.append(class_list.index(class_obj))
@@ -74,8 +71,8 @@ def create_new_classes(class_list):
         except IndexError:
             class_list.append(classes.Class(class_id, class_teacher_name, True))
 
-
     os.chdir(quizlib_directory)
+
 
 def create_new_students(class_object):
     number_of_new_students = 0
@@ -98,8 +95,9 @@ def create_new_students(class_object):
 
     os.chdir(quizlib_directory)
 
+
 def get_next_id(object_list: list, id_attribute_name: str):
-    id_list =[]
+    id_list = []
     for obj in object_list:
         if obj is not None:
             id_list.append(getattr(obj, id_attribute_name))
