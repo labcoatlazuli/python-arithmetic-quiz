@@ -54,7 +54,6 @@ def create_new_classes(class_list):
         except ValueError:
             print("Please ensure that you enter a number. Please try again.")
 
-    # number_of_existing_classes = len(os.listdir(os.getcwd()))
     if number_of_new_classes == 0:
         new_class_ids = positions
     else:
