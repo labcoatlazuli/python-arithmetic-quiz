@@ -2,6 +2,9 @@ import os
 __author__ = 'Eugene'
 
 quizlib_directory = os.getcwd()
+os.chdir("../data")
+data_directory = os.getcwd()
+os.chdir(quizlib_directory)
 
 def get_class_directory(class_id):
         os.chdir(data_directory)
@@ -14,8 +17,6 @@ if __name__ != "__main__":
     from quizlib import data_structure
     data_structure.init()
 
-os.chdir("../data")
-data_directory = os.getcwd()
-os.chdir(quizlib_directory)
+
 
 
