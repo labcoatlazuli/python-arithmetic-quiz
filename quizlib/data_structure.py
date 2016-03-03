@@ -3,7 +3,7 @@ from quizlib import quizlib_directory, get_class_directory, classes
 __author__ = 'Eugene'
 
 
-def init(): # Checks for existing data. If not, prompt user to create new classes.
+def init():  # Checks for existing data. If not, prompt user to create new classes.
     if not os.path.exists("../data"):
         os.chdir("..")
         os.mkdir("data")
@@ -21,11 +21,11 @@ def create_new_classes(class_list):
     number_of_new_classes = 0
     positions = []
     empty_class_ids = []
-    for class_obj in class_list:
+    for class_obj in class_list:  # Checks for unused class IDs, adds them to a list
         if class_obj is None:
             empty_class_ids.append(class_list.index(class_obj))
 
-    if len(empty_class_ids) is not 0:
+    if len(empty_class_ids) is not 0:  # Asks if they want to fill available empty classes first
         print("There are some unused class IDs available.")
         if input("Would you like to fill a few of them first before creating new ones?").lower() in ["y", "yes"]:
             while True:
@@ -46,7 +46,7 @@ def create_new_classes(class_list):
 
     while True:
         try:
-            number_of_new_classes = int(input("Please enter the number of additional classes that you would like to create: "))
+            number_of_new_classes = int(input("Please enter how many additional classes you would like to create: "))
             if number_of_new_classes >= 0:
                 break
             else:
@@ -73,7 +73,7 @@ def create_new_classes(class_list):
     os.chdir(quizlib_directory)
 
 
-def create_new_students(class_object):
+def create_new_students(class_object):  # Frontend only, see classes.py and student.py for backend
     number_of_new_students = 0
     os.chdir(get_class_directory(class_object.class_id))
     while True:

@@ -46,8 +46,8 @@
       <file leaf-file-name="data_structure.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quizlib/data_structure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38724375">
-              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.96241456">
+              <caret line="94" column="31" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -352,6 +352,54 @@
     <entry file="file://$PROJECT_DIR$/quizlib/data_structure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizlib/classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizlib/quiz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="119" selection-start-line="34" selection-start-column="119" selection-end-line="34" selection-end-column="119" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front_end_ui/ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="167" column="80" selection-start-line="167" selection-start-column="80" selection-end-line="167" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quizlib/data_structure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -439,6 +487,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/quizlib/quiz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="119" selection-start-line="34" selection-start-column="119" selection-end-line="34" selection-end-column="119" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front_end_ui/ui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -459,20 +517,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quizlib/quiz.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="119" selection-start-line="34" selection-start-column="119" selection-end-line="34" selection-end-column="119" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quizlib/data_structure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38724375">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.96241456">
+          <caret line="94" column="31" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
