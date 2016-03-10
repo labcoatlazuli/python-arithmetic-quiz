@@ -5,7 +5,7 @@ __author__ = 'Eugene'
 
 
 class Student:
-    def __init__(self, student_id, class_id, student_name, new=False):
+    def __init__(self, student_id, class_id, student_name, new=False):  # run once upon object creation
         self.student_id = student_id
         self.class_id = class_id
         self.student_name = student_name
@@ -46,8 +46,8 @@ class Student:
 
         if len(score_list) >= 3:
             with open(filename, "w") as f:
-                f.write(score_list[len(score_list) - 1])
                 f.write(score_list[len(score_list) - 2])
+                f.write(score_list[len(score_list) - 1])
 
         with open(filename, "a") as f:
             f.write("{}\n".format(new_score))

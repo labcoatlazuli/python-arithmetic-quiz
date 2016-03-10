@@ -1,0 +1,159 @@
+create empty list of class objects --> class_object_list
+initialize student_id, class_id as 0
+
+function update_all, no parameters:
+  clear class_object_list
+  change directory into data folder
+  for every single folder in data directory:
+    get class_id from folder name
+    create a new class object from class_id
+    append it to the class_object_list
+
+  set max_id to 0
+  for every single class_object in class_object_list:
+    if the class_object's class_id is higher than the current max_id then change max_id to the class_obj's class_id
+
+  create a temporary holder list --> temp_list
+  for count from 0 to max_id + 1:
+    initialize class_object_present to False
+
+    for every single class_object in class_object_list:
+      if class_object's class_id matches the count:
+        append class_obj to the temp_list
+        set class_object_present to True
+        break out of inner for loop
+    if class_object_present is False:
+      append a null object None to the temp_list
+
+  copy the temp_list into the class_object_list
+  delete the temp_list
+
+  change directory to quizlib_directory
+
+function select_class_id, no parameters:
+  output to user a list of all registered classes with IDs like so:
+  for every class_object in class_object_list:
+    if the class_object is not a null object None:
+      get the class_id
+      get the class_teacher by running get_class_teacher on class_object using class_id
+      print a list of classes as "<class_teacher>'s class, class ID <class_id>'"
+
+  while True:
+    ask the user for the class_id
+    if the input is not a valid number or the class ID doesn't exist then tell user to enter a valid class ID.
+    else break out of loop and continue with rest of program
+
+while True:
+  run update_all function to update all class and student objects
+  print to the user a list of possible tasks as follows:
+    1 - To login and play the quiz
+    2 - View scores for a classes
+    3 - Add new classes
+    4 - Add new student accounts into an existing class
+
+  ask the user for their choice
+
+  if their choice is 1:
+    print to the user that they need to login
+
+    run select_class_id to get class_id
+    find current_class using class_id
+
+    ask user if they know their student_id
+    if no:
+      create a empty potential_student_list
+      ask the user for their student_name
+      iterate through every student_object in the current_class's student_list:
+        if the student_name matches the name for the current student_object:
+          append the student_object to the potential_student_list
+
+      if the potential_student_list is empty:
+        print to the user that their name was not found, ask them to try again or ask the teacher to create an account for them.
+        continue to beginning of loop
+
+      else:
+        for every student in the potential_student_list:
+          print to the user each student as follows:
+            "<student_name>, Student ID <student_id>"
+
+    while True:
+      ask the user for their student_id
+      if the input is not a valid number:
+        tell the user to enter a valid Student ID
+      else:
+        break out of loop
+
+    if the student_id cannot be found in the current_class's student_list:
+      tell the user that their Student ID was not found, to try the name search or otherwise ask the teacher to create an account.
+      continue to beginning of loop
+
+    set current_student to the student_object in the current_class's student_list at index student_id
+
+    call the quiz function from quiz.py
+    set the student_score to the returned ValueError
+    run update_student_savefile function on the current_student object to update the save files
+
+  else if the choice is 2:
+
+    run select_class_id to set the current class_id
+
+    find current_class using class_id
+
+    tell the user that they now have three options as follows:
+      1 - Sort students in class by alphabetical order, showing each student's top score
+      2 - Sort by all individual scores achieved, highest to lowest
+      3 - Sort by each student's average score, highest to lowest
+
+      ask user for the sorting_method
+
+      if the sorting_method is 1:
+        get the sorted scores_list by running the get_class_scores_alphabetical function on the current_class object
+
+        if the length of the scores_list is 0:
+          tell the user that this class hasn't had any scores yet
+
+        else:
+          for every score_item in scores_list:
+            print score_item as follows:
+              "<student_name>, top score of <score>"
+              # Note that in the program, the student_name and score are referred to as score_item[0] and score_item[1] respectively.
+              This is because the sorting function in classes.py returns a list, where every list item is another list, in the format of [student_name, student's score].
+
+      else if the sorting_method is 2:
+      et the sorted scores_list by running the get_class_scores_descending function on the current_class object
+
+      if the length of the scores_list is 0:
+        tell the user that this class hasn't had any scores yet
+
+      else:
+        for every score_item in scores_list:
+          print score_item as follows:
+            "Score of <score> achieved by <student_name>"
+
+      else if the sorting_method is 2:
+        get the sorted scores_list by running the get_class_average_scores_descending function on the current_class object
+
+        if the length of the scores_list is 0:
+          tell the user that this class hasn't had any scores yet
+
+        else:
+          for every score_item in scores_list:
+            print score_item as follows:
+              "Average score of <score> achieved by <student_name>"
+
+      else:
+        tell the user that they had an invalid choice of sorting method
+
+  else if the choice is 3:
+    change directory into the data folder
+    run the create_new_classes function in data_structure.py passing the class_object_list as an argument
+
+  else if the choice is 4:
+    run select_class_id function to get the class_id
+    get the current_class object using the class_id
+    run the create_new_students function in data_structure.py passing the current_class object as an argument
+
+  else:
+    tell the user to enter a valid choice of operations
+
+  print a newline.

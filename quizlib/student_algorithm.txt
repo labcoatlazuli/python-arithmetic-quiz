@@ -1,0 +1,72 @@
+define a class called Student:
+    define the __init__ method with following parameters:
+        student_id
+        class_id
+        student_name
+        student_scores
+        new  # this is a boolean value, and if False, the default,
+        this means that the object is being created from existing
+        data. If not, the student object is a new one which will
+        initiate the file creation methods
+
+    if new is True:
+        run create_student_file method
+    run update_student_object_scores method
+
+    define the update_student_object_scores method:
+
+        change directory into the student's class folder
+        derive the filename of the student's text file as follows:
+        "<student_id> - <class_id> - <student_name>.txt"
+
+        open the file using aforementioned filename in read mode:
+            turn the file object into a list called student_scores
+            for every line in the list strip the newline character
+
+            turn every item in student_scores into an integers
+
+        change directory back to the quizlib_directory
+
+    define the create_student_file method:
+
+        change directory into the student's class folder
+        derive the filename of the student's text file as follows:
+        "<student_id> - <class_id> - <student_name>.txt"
+
+        open the file using aforementioned filename in exclusive file creation mode:
+            tell the user that file has been created succesfully
+
+        change directory back into the quizlib_directory
+
+    define the update_student_savefile method: one parameter new_score
+
+        change directory into student's class folder
+        derive the filename of the student's text file as follows:
+        "<student_id> - <class_id> - <student_name>.txt"
+
+        create an empty score_list
+        open the file using aforementioned filename in read mode
+            turn the file object into a list, assign to score_list
+
+        if the length of the score_list is more than or equal to 3:
+            open the file in write mode, clearing file:
+                write the second last value in score_list to the file
+                write the last value in score_list to the file
+
+        open the file in append mode:
+            append the new_score to the file
+
+        change directory back to quizlib_directory
+        run update_student_object_scores
+
+    define the get_student_best_score method:
+        if the length of student_scores is 0:
+            return None
+        else:
+            return the maximum value in the student_scores list
+
+    define the get_student_average_score method:
+        if the length of student_scores is 0:
+            return 0
+        else:
+            return the arithmetic mean of the student_scores

@@ -20,16 +20,16 @@ def update_all(): # Updates all objects from save files
         class_object_list.append(classes.Class(class_id)) # Adds new class object to list
 
     max_id = 0
-    for class_obj in class_object_list: # Find highest class id
-        if int(class_obj.class_id) > int(max_id):
-            max_id = class_obj.class_id
+    for class_object in class_object_list: # Find highest class id
+        if int(class_object.class_id) > int(max_id):
+            max_id = class_object.class_id
 
     temp_list = []
     for count in range(int(max_id) + 1): # This entire section moves class objects to the list index specified by their
         class_object_present = False     # class id, so if there are missing class folders for eg class 3, index 3
-        for class_obj in class_object_list: # is not taken up by another class. Instead a placeholder None is assigned.
-            if int(class_obj.class_id) == count:
-                temp_list.append(class_obj)
+        for class_object in class_object_list: # is not taken up by another class. Instead a placeholder None is assigned.
+            if int(class_object.class_id) == count:
+                temp_list.append(class_object)
                 class_object_present = True
                 break
         if class_object_present == False:
@@ -65,7 +65,7 @@ def select_class_id(): # General class selector function: prints out current cla
 class InvalidSelectionError(Exception):
     pass
 
-while True:
+while True:  # main logic loop
     update_all() # Update class objects from save files at the beginning of each program loop
 
     print("Hello! Welcome to the quiz menu! Please enter a number to perform a task.")
@@ -100,7 +100,7 @@ while True:
         while True:  # Check that the answer is a valid number
             try:
                 try:
-                    student_id = int(input("Your Student ID: "))
+                    student_id = int(input("Your Student ID: ")) # The user should know their Student ID by this point
 
                 except ValueError:
                     raise InvalidSelectionError

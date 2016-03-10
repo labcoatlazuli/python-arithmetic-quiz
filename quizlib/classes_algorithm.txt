@@ -1,0 +1,108 @@
+define a class called Class:
+    define the __init__ method: this method is run upon object creation
+
+        to create a Class object, require the following parameters:
+            class_id
+            teacher_name
+            new  # this is a boolean value, which if false,
+            which it is by default, says that the class object
+            being created does already exist in data, but if
+            not, the class is a new one which will initiate
+            the file creation methods.
+
+        if new is True:
+            run create_class_file method
+        run get_class_teacher to get teacher_name
+        run update_class_object
+
+    define the update_class_object method:
+
+        change directory into the class folder:
+            run get_class_directory using class_id
+
+        for every student_save_filename in the class folder:
+            remove the file extension from student_save_filename
+            split the student_save_filename into two parts:
+                the student_id
+                the name
+            create a student object based on the above data
+            append the new object into the student_list
+
+        change directory back to the quizlib_directory
+
+    define the create_new_student method: one student_name parameter
+        create a student object based on the student_name an
+        get the length of the student_list which will be the
+        new student_id of the student object
+        append the student object to the student_list
+
+    define the create_class_file method:
+        tell the user the class_id of the new class
+        change directory into the data_directory
+        make a new class directory with the name "<class_id> - <teacher_name>"
+        change directory back to quizlib_directory
+
+    define the get_class_teacher method:
+        get the directory name of the class folder
+        split the name into 2 parts, the 2nd part will be the teacher_name
+        return the teacher_name
+
+    define the get_class_scores_alphabetical method:
+
+        define a sort key called alphabetical_sort_key:
+            the sort function will take each item in the list
+            as another list, and sort by the second item in
+            the mini-list.
+            example [[ayy, 3], [lmao, 1], [lol, 2]]
+            the sort function will take the encompassing list
+            of mini-lists, and sort by the numbers (the second
+            item in each mini-list)
+            the sort function later will sort the example into
+            [[lmao, 1], [lol, 2], [ayy, 3]]
+
+        create an empty scores_list
+        for each student_object in student_list:
+            get the student's best score by running get_student_best_score in students.py
+            get the student's name
+            create a mini-list from the above data as follows
+            [name, best_score]
+            append mini_list to scores_list
+
+        sort the scores_list using alphabetical_sort_key defined above
+
+        return the sorted scores_list
+
+    define the get_class_scores_descending method:
+
+        define a sort key called top_scores_sort_key:
+            the sort function will take each item in the list
+            as another list, and sort by the first item in the
+            mini-list
+
+        create an empty scores_list
+        for each student_object in student_list:
+            for every one of the student's scores:
+                create a mini-list as follows
+                [score, student_name]
+                append the mini-list to scores_list
+
+        sort the scores_list using top_scores_sort_key and set reverse order to True
+
+        return the sorted scores_list
+
+    define the get_class_average_scores_descending:
+        define a sort key called averages_sort_key:
+            the sort function will take each item in the list
+            as another list, and sort by the first item in
+            the mini-list
+
+        create an empty scores_list
+        for each student_object in student_list:
+            run get_student_average_score to get average score
+
+            create a mini-list as follows
+            [average_score, student_name]
+            append the mini-list to scores_list
+
+        sort the scores_list using averages_sort_key and set reverse order to True
+        return the sorted scores_list
