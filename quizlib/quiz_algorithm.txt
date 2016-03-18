@@ -1,0 +1,36 @@
+define the quiz() method:
+    set the possible mathematical operator_types as +, -, and *
+
+    Initialize player_score to 0
+    Initialize player_answer to 0
+
+    for a counter variable count from 0 - 10: ie repeat 10 times:
+        set question_operator to a random choice of operator_types
+        set first_number to a random integer between 1 and 12
+        set second_number to a random integer between 1 and 12
+
+        ask the user what is <first_number> <question_operator> <second_number>?
+
+        while True:
+            ask the user for their answer
+            break out of loop
+        except if they have entered an invalid number:
+            tell user to ensure that they enter a number
+
+        if the question_operator is +:
+            set the correct_answer to first_number + second_number
+        else if the question_operator is -:
+            set the correct_answer to first_number - second_number
+        else:
+            set the correct_answer to first_number * second_number
+
+        if the correct_answer is the same as the player_answer:
+            add 1 to player_score
+            tell user that they got the answer correct
+        else:
+            tell the user that they got the answer wrong
+            tell the user the correct_answer
+
+    tell the user their final player_score
+
+    return player_score

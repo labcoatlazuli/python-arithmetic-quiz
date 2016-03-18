@@ -1,23 +1,9 @@
 import os
-from quizlib import quizlib_directory, get_class_directory, classes
+from quizlib import quizlib_directory, classes
 __author__ = 'Eugene'
 
 
-def init():  # Checks for existing data. If not, prompt user to create new classes.
-    if not os.path.exists("../data"):
-        os.chdir("..")
-        os.mkdir("data")
-        os.chdir("data")
-
-        create_new_classes([])
-
-    else:
-        print("Initial file setup has already been run. If you want to reset all data, delete the data folder.")
-
-    os.chdir("../quizlib")
-
-
-def create_new_classes(class_list):
+def create_new_classes(class_list, data_init=False):
     number_of_new_classes = 0
     positions = []
     empty_class_ids = []
@@ -46,11 +32,19 @@ def create_new_classes(class_list):
 
     while True:
         try:
-            number_of_new_classes = int(input("Please enter how many additional classes you would like to create: "))
-            if number_of_new_classes >= 0:
-                break
+            if data_init:
+                number_of_new_classes = int(input("Please enter the number of classes you would like to create"))
+                if number_of_new_classes > 0:
+                    break
+                else:
+                    print("Please create at least 1 class")
+
             else:
-                print("Please enter a number equal to or larger than 0.")
+                number_of_new_classes = int(input("Please enter how many additional classes you would like to create: "))
+                if number_of_new_classes >= 0:
+                    break
+                else:
+                    print("Please enter a number equal to or larger than 0.")
         except ValueError:
             print("Please ensure that you enter a number. Please try again.")
 
@@ -64,6 +58,7 @@ def create_new_classes(class_list):
 
     for class_id in new_class_ids:
         class_teacher_name = input("Please input the class teacher's name for class {}: ".format(class_id))
+        print(class_list)
         try:
             class_list[class_id] = None
             class_list[class_id] = classes.Class(class_id, class_teacher_name, True)
@@ -88,7 +83,9 @@ def create_new_students(class_object):  # Frontend only, see classes.py and stud
 
     number_of_existing_students = len(os.listdir(os.getcwd()))
 
-    for student_id in range(number_of_existing_students, number_of_existing_students + number_of_new_students):
+    new_student_ids = range(number_of_existing_students, number_of_existing_students + number_of_new_students)
+
+    for student_id in new_student_ids:
         student_name = input("Please input the new student's name for new student ID {}: ".format(student_id))
         class_object.create_new_student(student_name)
 
@@ -100,5 +97,15 @@ def get_next_id(object_list: list, id_attribute_name: str):
     for obj in object_list:
         if obj is not None:
             id_list.append(getattr(obj, id_attribute_name))
-    highest_id = max(id_list)
-    return int(highest_id) + 1
+    if len(id_list) == 0:
+        return 0
+    else:
+        highest_id = max(id_list)
+        return int(highest_id) + 1
+
+def get_class_directory(class_id):
+    from quizlib import data_directory
+    os.chdir(data_directory)
+    for directory in os.listdir(os.getcwd()):
+        if str(class_id) == directory.split(" - ")[0]:
+            return directory

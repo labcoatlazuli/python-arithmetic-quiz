@@ -1,4 +1,4 @@
-define a class called Class:
+define a class called Class: the template for Class objects
     define the __init__ method: this method is run upon object creation
 
         to create a Class object, require the following parameters:
@@ -6,8 +6,8 @@ define a class called Class:
             teacher_name
             new  # this is a boolean value, which if false,
             which it is by default, says that the class object
-            being created does already exist in data, but if
-            not, the class is a new one which will initiate
+            being created does already exist in data, and
+            the object creation is merely a data refresh but if not, the class is a new one which will initiate
             the file creation methods.
 
         if new is True:
@@ -106,3 +106,10 @@ define a class called Class:
 
         sort the scores_list using averages_sort_key and set reverse order to True
         return the sorted scores_list
+
+    define the get_class_directory method: one parameter class_id
+        change directory into the data_directory
+        for every class folder in the data_directory:
+            extract the class id from the folder name
+            if it matches the class_id argument:
+                return the directory name

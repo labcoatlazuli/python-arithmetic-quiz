@@ -70,3 +70,10 @@ define a class called Student:
             return 0
         else:
             return the arithmetic mean of the student_scores
+
+    define the get_class_directory method: one parameter class_id
+        change directory into the data_directory
+        for every class folder in the data_directory:
+            extract the class id from the folder name
+            if it matches the class_id argument:
+                return the directory name

@@ -1,0 +1,114 @@
+define init() method, run every logic loop and once before the main
+logic loop in ui.py:
+    if the data_directory doesn't exist:
+        change directory to parent directory
+        make the data_directory
+        change directory into data_directory
+
+        run the create_new_classes() method with an empty class object list
+
+    else:
+        tell the user the initial file structure has already been
+        created and if they wish to reset all the student data
+        they should delete the data folder
+
+    change directory back to quizlib_directory
+
+define the create_new_classes() method: one parameter of a list of class objects called class_list
+    set number_of_new_classes to 0
+    create a list called empty_class_ids
+    for every class_obj in class_list:
+        if the class_obj is a null object ie undefined:
+            take the index of the class_obj in class_list
+            append to empty_class_ids
+
+    if there are empty_class_ids found:
+        tell the user that there are some unfilled Class IDs
+        available.
+        ask the user if they would like to fill the unfilled IDs
+        before creating new ones:
+        if the answer is yes:
+            while True:
+                print to the user the list of empty_class_ids
+                ask the user to input a list of the empty
+                positions they would like to fill
+                turn the string of Number IDS into a list by
+                splitting the string by the comma characters,
+                removing whitespace, and converting to integers
+
+                if the positions they have entered are a subset
+                of the empty_class_ids:
+                    break out of the loop
+
+                else:
+                    tell the user to enter class IDs from the
+                    unused ones shown
+            except if at any point during the loop invalid
+            numbers are detected:
+                tell the user to only enter valid integers
+
+    while True:
+        ask for the number_of_new_classes they would like to create in
+        addition to the unfilled ones chosen
+        if the number_of_new_classes chosen is more than or equal to 0:
+            break out of the loop
+        else:
+            tell the user to enter a number equal to or larger than 0
+
+    except if at any time invalid numbers are detected:
+        tell the user to ensure that they ensure they enter valid numbers
+
+    if the number_of_new_classes is 0:
+        set the new_class_ids as the existing positions
+    else:
+        calculate the ids of the new additional classes using get_next_id
+        set the new_class_ids as positions + the above
+
+    for every class_id in new_class_ids:
+        ask the user for the class_teacher_name for the current class_id
+        create a new class object in class_list at the current class_id
+        except if the class object being created is at a nonexistent index
+            append the new object to the list
+
+define the create_new_students method: one paramter, a single class_object
+    initialize the number_of_new_students to 0
+    change directory to the class_directory of the current class_object
+    while True:
+        ask the user for the number of new students they would like to create
+        if the number_of_new_students entered is more than or equal to 1
+            break out of the loop
+
+        else:
+            tell the user to enter a number equal or larger than 1
+
+        except if at any time floating point or invalid numbers are detected:
+            tell the user to ensure they enter a valid number
+
+    find the number_of_existing_students by getting the number of student
+    savefiles in the current class direcotry
+
+    calculate the list of new student ids by getting the range between
+    the number_of_existing_students and the number_of_existing_students +
+    number_of_new_students
+
+    for every student_id in the list:
+        ask the user for the new student's name
+        call the class_object's create_new_student method, creating a new
+        student object with the student_name
+
+    change directory back to the quizlib_directory
+
+define the get_next_id method: 2 parameters: a list of objects, and an object attribute
+    create an empty id_list
+    for every obj in object_list:
+        if the object is not a null object None:
+            append to the id_list the object attribute of the object specified
+    set the highest_id to the maximum value in id_list
+    return the highest_id + 1 ie the next id.
+
+define the get_class_directory method: one parameter class_id
+    change directory into the data_directory
+    for every class folder in the data_directory:
+        extract the class id from the folder name
+        if it matches the class_id argument:
+            return the directory name

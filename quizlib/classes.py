@@ -1,6 +1,6 @@
 import os
 from quizlib import student
-from quizlib import quizlib_directory, get_class_directory, data_directory
+from quizlib import quizlib_directory
 __author__ = 'Eugene'
 
 
@@ -17,7 +17,7 @@ class Class:
 
     def update_class_object(self):  # Refresh object data from files
 
-        os.chdir(get_class_directory(self.class_id))
+        os.chdir(self.get_class_directory(self.class_id))
 
         for student_save_filename in os.listdir(os.getcwd()):
             student_save_filename = student_save_filename.strip(".txt")
@@ -33,13 +33,15 @@ class Class:
         self.student_list.append(student_object)  # Add the student object to the class list
 
     def create_class_file(self):  # Creates new class directory
+        from quizlib import data_directory
         print("Creating new folder for class {}...".format(self.class_id))
+        print(data_directory)
         os.chdir(data_directory)
         os.mkdir("{0} - {1}".format(self.class_id, self.teacher_name))
         os.chdir(quizlib_directory)
 
     def get_class_teacher(self):
-        directory = get_class_directory(self.class_id)
+        directory = self.get_class_directory(self.class_id)
         return directory.split(" - ")[1]
 
     def get_class_scores_alphabetical(self):  # All sorting functions defined below will follow a similar pattern
@@ -75,3 +77,10 @@ class Class:
 
         scores_list = sorted(scores_list, key=averages_sort_key, reverse=True)
         return scores_list
+
+    def get_class_directory(self, class_id):
+        from quizlib import data_directory
+        os.chdir(data_directory)
+        for directory in os.listdir(os.getcwd()):
+            if str(class_id) == directory.split(" - ")[0]:
+                return directory

@@ -1,6 +1,6 @@
 import os, statistics
 from quizlib import quizlib_directory
-from quizlib import get_class_directory
+
 __author__ = 'Eugene'
 
 
@@ -16,7 +16,7 @@ class Student:
 
     def update_student_object_scores(self):
 
-        os.chdir(get_class_directory(self.class_id))
+        os.chdir(self.get_class_directory(self.class_id))
         filename = "{0} - {1} - {2}.txt".format(self.student_id, self.class_id, self.student_name)
 
         with open(filename, "r") as f:
@@ -29,7 +29,7 @@ class Student:
         os.chdir(quizlib_directory)
 
     def create_student_file(self):
-        os.chdir(get_class_directory(self.class_id))
+        os.chdir(self.get_class_directory(self.class_id))
         filename = "{0} - {1} - {2}.txt".format(self.student_id, self.class_id, self.student_name)
         with open(filename, "x"):
             print("{} has been created successfully.".format(filename))
@@ -37,7 +37,7 @@ class Student:
         os.chdir(quizlib_directory)
 
     def update_student_savefile(self, new_score):
-        os.chdir(get_class_directory(self.class_id))
+        os.chdir(self.get_class_directory(self.class_id))
         filename = "{0} - {1} - {2}.txt".format(self.student_id, self.class_id, self.student_name)
 
         score_list = []
@@ -66,3 +66,11 @@ class Student:
             return 0
         else:
             return statistics.mean(self.student_scores)
+
+    def get_class_directory(self, class_id):
+        from quizlib import data_directory
+        os.chdir(data_directory)
+        for directory in os.listdir(os.getcwd()):
+            if str(class_id) == directory.split(" - ")[0]:
+                return directory
+

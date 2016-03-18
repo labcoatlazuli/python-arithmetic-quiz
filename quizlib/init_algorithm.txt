@@ -1,0 +1,27 @@
+set package level variable quizlib_directory to the current directory
+
+upon initial program execution:
+tell the user that the program is checking for an existing data structure
+if the data folder doesn't exist:
+    change directory to parent directory
+    make the data folder
+    change directory into the data folder
+    set data_directory to current folder
+    print data_directory to the user
+
+else:
+    change directory into the data folder
+    set data_directory to the current folder
+    print data_directory to the user
+    tell user that initial file setup has already been run
+    print a newline
+
+change directory to quizlib_directory
+# At this point the interpreter will now continue with running ui.py
+
+define the get_class_directory method: one parameter class_id
+    change directory into the data_directory
+    for every class folder in the data_directory:
+        extract the class id from the folder name
+        if it matches the class_id argument:
+            return the directory name
