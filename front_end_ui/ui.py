@@ -1,6 +1,11 @@
-import os
-from quizlib import quizlib_directory, data_directory
+import os, sys
 __author__ = 'Eugene'
+
+os.chdir("..")
+sys.path.append(os.getcwd())
+os.chdir("front_end_ui")
+
+from quizlib import quizlib_directory, data_directory
 
 class_object_list = []
 student_id = 0
